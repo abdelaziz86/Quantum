@@ -29,10 +29,10 @@
 		}
 
 		.video-container {
-			margin-top: 20px;
-			max-height: 550px;
-			overflow-y: auto;
-		}
+        margin-top: 20px;
+        max-height: 550px; /* You can adjust this value as needed */
+        overflow-y: auto; /* This enables scrolling */
+    }
 	</style>
 {% endblock %}
 
@@ -40,10 +40,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<a href="https://www.instagram.com/abdelaziz.makhlouf/" target="_blank" rel="noopener noreferrer" class="profil-container">
-					<div class="profil"></div>
-					<span class="name">Abdelaziz Makhlouf</span>
-				</a>
+				 
+				<div class="d-flex justify-content-between">
+					<a href="https://www.instagram.com/abdelaziz.makhlouf/" target="_blank" rel="noopener noreferrer" class="profil-container">
+						<div class="profil"></div>
+						<span class="name">Abdelaziz Makhlouf</span>
+					</a>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+							{% if app.request.query.get('lang') %}
+								{{ app.request.query.get('lang')|upper }}
+							{% else %}
+								Translate
+							{% endif %}
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" href="?lang=en">English</a></li>
+							<li><a class="dropdown-item" href="?lang=ar">Arabic</a></li>
+							<li><a class="dropdown-item" href="?lang=fr">French</a></li>
+							<li><a class="dropdown-item" href="?lang=es">Spanish</a></li>
+						</ul>
+					</div>
+				</div>
 				<br>
 				<h1 class="titles">{{ post.title }}</h1>
 
@@ -62,16 +80,34 @@
 
 
 				<br>
-				<p>{{ post.description|raw }}</p>
+				<p id="description">
+                    {% set lang = app.request.query.get('lang', 'en') %}
+                    {% if lang == 'ar' and post.descArabic is not empty %}
+                        {{ post.descArabic|raw }}
+                    {% elseif lang == 'fr' and post.descFrench is not empty %}
+                        {{ post.descFrench|raw }}
+                    {% elseif lang == 'es' and post.descSpanish is not empty %}
+                        {{ post.descSpanish|raw }}
+                    {% else %}
+                        {{ post.description|raw }}
+                    {% endif %}
+                </p>
+
+				<br>
 				{% if post.link %}
-					<p>
+					<center>
 						<a href="{{ post.link }}" target="_blank" class="btn btn-success">Go to Reel</a>
-					</p>
+					</center>
 				{% endif %}
+
+				<br>
+				<br>
 			</div>
-			<div class="col-md-6 video-container">
+			<div class="col-md-6 ">
 				<center>
-					<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="{{ post.link }}" data-instgrm-version="13"></blockquote>
+					<br>
+					<blockquote class="instagram-media video-container" data-instgrm-captioned data-instgrm-permalink="{{ post.link }}" data-instgrm-version="13"></blockquote>
+					
 				</center>
 			</div>
 		</div>

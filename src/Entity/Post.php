@@ -23,7 +23,7 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=5000)
+     * @ORM\Column(type="string", length=1500)
      */
     private $description;
 
@@ -41,6 +41,21 @@ class Post
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=1500, nullable=true)
+     */
+    private $desc_arabic;
+
+    /**
+     * @ORM\Column(type="string", length=1500, nullable=true)
+     */
+    private $desc_french;
+
+    /**
+     * @ORM\Column(type="string", length=1500, nullable=true)
+     */
+    private $desc_spanish;
 
      
 
@@ -105,6 +120,42 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDescArabic(): ?string
+    {
+        return $this->desc_arabic;
+    }
+
+    public function setDescArabic(?string $desc_arabic): self
+    {
+        $this->desc_arabic = $desc_arabic;
+
+        return $this;
+    }
+
+    public function getDescFrench(): ?string
+    {
+        return $this->desc_french;
+    }
+
+    public function setDescFrench(?string $desc_french): self
+    {
+        $this->desc_french = $desc_french;
+
+        return $this;
+    }
+
+    public function getDescSpanish(): ?string
+    {
+        return $this->desc_spanish;
+    }
+
+    public function setDescSpanish(?string $desc_spanish): self
+    {
+        $this->desc_spanish = $desc_spanish;
 
         return $this;
     }

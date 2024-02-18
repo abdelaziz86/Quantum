@@ -16,6 +16,18 @@ class PostFormType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
+            ->add('desc_arabic', TextareaType::class, [
+                'required' => false,
+                'attr' => ['maxlength' => 1500]
+            ])
+            ->add('desc_french', TextareaType::class, [
+                'required' => false,
+                'attr' => ['maxlength' => 1500]
+            ])
+            ->add('desc_spanish', TextareaType::class, [
+                'required' => false,
+                'attr' => ['maxlength' => 1500]
+            ])
             ->add('link', TextType::class, ['required' => false])
             ->add('image', FileType::class, ['required' => false])
         ;

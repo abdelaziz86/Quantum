@@ -8,9 +8,9 @@
 {% block body %}
 	<div class="container">
 		<h1>Create Post</h1>
+		{{ form_start(form, {'attr': {'class': 'form'}}) }}
 		<div class="row">
 			<div class="col-md-6">
-				{{ form_start(form, {'attr': {'class': 'form'}}) }}
 				<div class="form-group">
 					{{ form_label(form.title, 'Title') }}
 					{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
@@ -20,6 +20,18 @@
 					{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
 				</div>
 				<div class="form-group">
+					{{ form_label(form.desc_arabic, 'Description (Arabic)') }}
+					{{ form_widget(form.desc_arabic, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.desc_french, 'Description (French)') }}
+					{{ form_widget(form.desc_french, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.desc_spanish, 'Description (Spanish)') }}
+					{{ form_widget(form.desc_spanish, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="form-group">
 					{{ form_label(form.link, 'Link') }}
 					{{ form_widget(form.link, {'attr': {'class': 'form-control'}}) }}
 				</div>
@@ -27,10 +39,11 @@
 					{{ form_label(form.image, 'Image') }}
 					{{ form_widget(form.image, {'attr': {'class': 'form-control-file'}}) }}
 				</div>
+				<br>
 				<button type="submit" class="btn btn-primary">Submit</button>
-				{{ form_end(form) }}
 			</div>
 		</div>
+		{{ form_end(form) }}
 	</div>
 {% endblock %}
 

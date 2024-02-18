@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post Details
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		.profil-container {
+			display: flex;
+			align-items: center;
+			color : black ;
+			text-decoration: none;
+		}
+
+		.profil {
+			width: 40px !important;
+			height: 40px;
+			border-radius: 50%;
+			background-image: url("https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/346489717_1418620955551745_40354199802802249_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=STBNo48GXMsAX9JMzu9&_nc_oc=AQloXcqAGv-QuDuqMTu6Pbiir9ZLB-89EtoNuWYz6etUKyUt1Noo5KEwbVubALvOB1eJQDE8PD7hrktyWTk-yStN&_nc_ht=scontent-cdg4-2.xx&oh=00_AfBMDFnCvD-P-8FEKo2troZzcv8imVZVYAKgulaUc3G1Mg&oe=65D6BE33");
+			background-size: cover;
+			background-position: center;
+			box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+			border: 2px solid black;
+		}
+
+		.name {
+			margin-left: 10px;
+			font-weight: bold;
+		}
+
+		.video-container {
+			margin-top: 20px;
+			max-height: 550px;
+			overflow-y: auto;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<a href="https://www.instagram.com/abdelaziz.makhlouf/" target="_blank" rel="noopener noreferrer" class="profil-container">
+					<div class="profil"></div>
+					<span class="name">Abdelaziz Makhlouf</span>
+				</a>
+				<br>
+				<h1 class="titles">{{ post.title }}</h1>
+
+				<div class="row" style="margin-top : 10px">
+					<div class="col">
+						{% if previous_post %}
+							<a href="{{ path('post_show', {id: previous_post.id}) }}" class="btn btn-primary butOrng btn-sm">&laquo; Previous</a>
+						{% endif %}
+					</div>
+					<div class="col text-end">
+						{% if next_post %}
+							<a href="{{ path('post_show', {id: next_post.id}) }}" class="btn btn-primary butOrng btn-sm">Next &raquo;</a>
+						{% endif %}
+					</div>
+				</div>
+
+
+				<br>
+				<p>{{ post.description|raw }}</p>
+				{% if post.link %}
+					<p>
+						<a href="{{ post.link }}" target="_blank" class="btn btn-success">Go to Reel</a>
+					</p>
+				{% endif %}
+			</div>
+			<div class="col-md-6 video-container">
+				<center>
+					<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="{{ post.link }}" data-instgrm-version="13"></blockquote>
+				</center>
+			</div>
+		</div>
+		<script async src="//www.instagram.com/embed.js"></script>
+	</div>
+{% endblock %}
+

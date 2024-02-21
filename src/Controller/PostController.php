@@ -2,12 +2,14 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Contact;
 use App\Form\PostFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PostRepository; 
+use App\Repository\ContactRepository; 
 
 class PostController extends AbstractController
 {
@@ -58,12 +60,16 @@ class PostController extends AbstractController
      */
     public function list(): Response
     {
+
+        $totalSubscribers = $this->getDoctrine()->getRepository(Contact::class)->count([]);
+
         // Sort posts by 'id' in descending order directly in the controller.
         // Replace 'id' with the property you want to sort by, like 'createdAt' or 'updatedAt'.
         $posts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['id' => 'DESC']);
 
         return $this->render('post/list.html.twig', [
             'posts' => $posts,
+            'totalSubscribers' => $totalSubscribers
         ]);
     }
 

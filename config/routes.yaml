@@ -14,3 +14,7 @@ app_login:
 
 app_logout:
     path: /logout
+
+subscribe_newsletter:
+    path: /subscribe-newsletter
+    controller: App\Controller\SubscriptionController::subscribeNewsletter
